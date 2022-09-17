@@ -11,7 +11,6 @@ const Home = () => {
     useEffect(() => { 
         //fetchMovie is a async function and return promise
         fetchMovies(tag).then((data)=>{
-            console.log(data)
             dispatch(addMovies(data))
         })
     },[])
