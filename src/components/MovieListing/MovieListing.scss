@@ -7,12 +7,16 @@
     font-weight: 400;
     
 }
-.movie-container {
-    // grid-template-columns: repeat(6, minmax(220px, 1fr));
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px 30px;
+
+.slick-dots  button:before {
+    color:White !important;
 }
+// .movie-container {
+//     // grid-template-columns: repeat(6, minmax(220px, 1fr));
+//     display: grid;
+//     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+//     gap: 30px 30px;
+// }
 
 
 

@@ -1,7 +1,7 @@
 @import "../../common/colors.scss";
 
 .header {
-    background-color: $secondary-color;
+    // background-color: $secondary-color;
     height:72px;
     padding: 0px 40px;
     display: flex;
@@ -19,3 +19,46 @@
     width:38px;
     height:38px;
 }
+
+.search-bar {
+    // border:solid red 0.03rem;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  
+    form {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      gap:5px;
+      button {
+        padding: 4px 10px;
+        font-size: 20px;
+        cursor: pointer;
+        height: 38px;
+        border-radius: 50%;
+        color: $secondary-font;
+        background-color:transparent;
+        border-color: transparent;
+      }
+    }
+  
+    input {
+      font-size: 18px;
+      width: 100%;
+      padding: 5px 5px 5px 10px;
+      height: 38px;
+      outline: none;
+      border-radius: 10px;
+      border-color: transparent;
+      color: $secondary-color;
+      
+
+      &:hover{
+        transform: scale(1.01);
+        transition: all 0.1s;
+    }
+
+    }
+
+  }

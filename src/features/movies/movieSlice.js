@@ -8,10 +8,10 @@ import { APIKey } from "../../common/apis/MovieApiKey"
 
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',
-    async () => {
+    async (tag="harry") => {
         // write the async fetch function here
         // return the data as Promise
-        const tag = "Harry"
+        console.log("tag",tag)
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=movie`)
         const { data } = await response;
         return data.Search // data.Search contains the array of movie data
@@ -23,8 +23,8 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncSeries = createAsyncThunk(
     'movies/fetchAsyncSeries',
-    async () => {
-        const tag = "Friends"
+    async (tag="harry") => {
+        console.log("tag",tag)
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
         const { data } = await response;
         return data.Search // data.Search contains the array of movie data
@@ -46,7 +46,8 @@ export const fetchAsyncMovieOrSeriesDetails = createAsyncThunk(
 const initialState = {
     movies : [],
     series: [],
-    selectedMovieOrSeriesDetails: {}
+    selectedMovieOrSeriesDetails: {},
+    searchText: "harry"
 }
 
 // handle the actions in reducers (extraReducers)
@@ -57,6 +58,9 @@ const movieSlice = createSlice({
     reducers:{
         removeMovieOrSeriesDetail: (state) => {
             state.selectedMovieOrSeriesDetails = {};
+        },
+        setSearchText: (state, {payload}) => {
+            state.searchText = payload
         }
     },
     //extra reducers for thunk
@@ -84,13 +88,13 @@ const movieSlice = createSlice({
 })
 
 // .actions will be used inside dispatch (provoded by useDispatch())
-export const {removeMovieOrSeriesDetail} = movieSlice.actions;
+export const {removeMovieOrSeriesDetail, setSearchText} = movieSlice.actions;
 
 // below function are used by useSelector to collect the data
 export const getAllMovies = (state) => state.movies.movies;
 export const getAllSeries = (state) => state.movies.series;
 export const getSelectedMovieOrSeriesDetail = (state) => state.movies.selectedMovieOrSeriesDetails
-
+export const getSearchText = (state) => state.movies.searchText;
 //used by store inside configure store function , reducer : {}
 export default movieSlice.reducer;
 
