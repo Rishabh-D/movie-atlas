@@ -8,10 +8,10 @@
     
 }
 .movie-container {
-    // display: grid;
-    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    // grid-template-columns: repeat(6, minmax(220px, 1fr));
     display: grid;
-    gap: 30px 50px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px 30px;
 }
 
 

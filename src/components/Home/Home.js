@@ -1,15 +1,16 @@
 import React, { useEffect }from 'react';
 import MovieListing from "../MovieListing/MovieListing"
-import  {fetchMovies}  from "../../common/apis/movieApiFunctions"
+// removed fetchMovies function
 import { useDispatch } from 'react-redux';
-// removed addMovies function
-import { fetchAsyncMovies } from '../../features/movies/movieSlice';
+
+import { fetchAsyncMovies, fetchAsyncSeries } from '../../features/movies/movieSlice';
 
 const Home = () => {
 
     const dispatch = useDispatch();
     useEffect(() => { 
         dispatch(fetchAsyncMovies())
+        dispatch(fetchAsyncSeries())
     },[dispatch])
 
     console.log("runs home")

@@ -19,10 +19,34 @@ export const fetchAsyncMovies = createAsyncThunk(
     }
 )
 
+// add new async function for fetching shows
+
+export const fetchAsyncSeries = createAsyncThunk(
+    'movies/fetchAsyncSeries',
+    async () => {
+        const tag = "Friends"
+        const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
+        const { data } = await response;
+        return data.Search // data.Search contains the array of movie data
+    }
+)
+
+// add async function for fetching details of movies or series
+
+export const fetchAsyncMovieOrSeriesDetails = createAsyncThunk(
+    'movies/fetchAsyncMovieOrSeriesDetails',
+    async (id) => {
+        const response = await movieApi.get(`?apiKey=${APIKey}&i=${id}&Plot=full`)
+        const { data } = await response;
+        return data
+    }
+)
 
 
 const initialState = {
-    movies : []
+    movies : [],
+    series: [],
+    selectedMovieOrSeriesDetails: {}
 }
 
 // handle the actions in reducers (extraReducers)
@@ -31,8 +55,8 @@ const movieSlice = createSlice({
     name:"movies",
     initialState:initialState,
     reducers:{
-        addMovies: (state, {payload}) => {
-            state.movies = payload;
+        removeMovieOrSeriesDetail: (state) => {
+            state.selectedMovieOrSeriesDetails = {};
         }
     },
     //extra reducers for thunk
@@ -41,18 +65,33 @@ const movieSlice = createSlice({
             console.log("pending")
         },
         [fetchAsyncMovies.fulfilled]: (state, {payload}) => {
-            console.log("Fetched successfully")
+            console.log("successfully fetched movies")
             return {...state, movies: payload}
         },
         [fetchAsyncMovies.rejected]: () => {
             console.log("rejected")
+        },
+        [fetchAsyncSeries.fulfilled]: (state, {payload}) => {
+            console.log("successfully fetched series")
+            return {...state, series:payload}
+        },
+        [fetchAsyncMovieOrSeriesDetails.fulfilled]: (state, {payload}) => {
+            console.log("successfully fetched details")
+            return {...state, selectedMovieOrSeriesDetails:payload}
         }
 
     }
 })
 
-export const {addMovies} = movieSlice.actions;
+// .actions will be used inside dispatch (provoded by useDispatch())
+export const {removeMovieOrSeriesDetail} = movieSlice.actions;
+
+// below function are used by useSelector to collect the data
 export const getAllMovies = (state) => state.movies.movies;
+export const getAllSeries = (state) => state.movies.series;
+export const getSelectedMovieOrSeriesDetail = (state) => state.movies.selectedMovieOrSeriesDetails
+
+//used by store inside configure store function , reducer : {}
 export default movieSlice.reducer;
 
 
