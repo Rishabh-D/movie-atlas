@@ -1,3 +1,5 @@
+// this became redundant after we used thunk
+
 import movieApi from "./movieApi"
 import { APIKey } from "./MovieApiKey"
 

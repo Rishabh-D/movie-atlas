@@ -2,18 +2,15 @@ import React, { useEffect }from 'react';
 import MovieListing from "../MovieListing/MovieListing"
 import  {fetchMovies}  from "../../common/apis/movieApiFunctions"
 import { useDispatch } from 'react-redux';
-import { addMovies } from '../../features/movies/movieSlice';
+// removed addMovies function
+import { fetchAsyncMovies } from '../../features/movies/movieSlice';
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const tag ="Harry"
 
+    const dispatch = useDispatch();
     useEffect(() => { 
-        //fetchMovie is a async function and return promise
-        fetchMovies(tag).then((data)=>{
-            dispatch(addMovies(data))
-        })
-    },[])
+        dispatch(fetchAsyncMovies())
+    },[dispatch])
 
     console.log("runs home")
     return (
