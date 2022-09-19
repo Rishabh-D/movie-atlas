@@ -8,7 +8,7 @@ import './Header.scss'
 
 
 const Header = () => {
-    const [term, setTerm] = useState("Harry")
+    const [term, setTerm] = useState("")
     const dispatch = useDispatch()
     let history = useHistory();
     const submitHandler=(e)=>{
@@ -18,7 +18,7 @@ const Header = () => {
         dispatch(fetchAsyncSeries(term))
         dispatch(setSearchText(term))
         // setTerm("")
-        history.goBack()
+        history.push("/home")
 
 
     }

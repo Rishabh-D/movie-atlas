@@ -33,5 +33,12 @@
         font-weight: 400;
         font-family:Arial, Helvetica, sans-serif;
         margin-bottom: 10px;
+        -webkit-line-clamp: 2;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
     }
 }

@@ -8,10 +8,13 @@ import { APIKey } from "../../common/apis/MovieApiKey"
 
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',
-    async (tag="harry") => {
+    async (tag) => {
         // write the async fetch function here
         // return the data as Promise
-        console.log("tag",tag)
+        if (tag==undefined || tag == null || tag==""){
+            tag="harry"
+        }
+        console.log("tag is",tag)
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=movie`)
         const { data } = await response;
         return data.Search // data.Search contains the array of movie data
@@ -23,8 +26,10 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncSeries = createAsyncThunk(
     'movies/fetchAsyncSeries',
-    async (tag="harry") => {
-        console.log("tag",tag)
+    async (tag) => {
+        if (tag==undefined || tag == null || tag==""){
+            tag="harry"
+        }
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
         const { data } = await response;
         return data.Search // data.Search contains the array of movie data
@@ -47,7 +52,7 @@ const initialState = {
     movies : [],
     series: [],
     selectedMovieOrSeriesDetails: {},
-    searchText: "harry"
+    searchText: ""
 }
 
 // handle the actions in reducers (extraReducers)

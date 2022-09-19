@@ -1,0 +1,82 @@
+@import "../../common/colors.scss";
+
+.landing{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    
+    
+}
+
+.disabled {
+    display: none;
+}
+
+.landing p {
+    color:$primary-font;
+    padding:64px;
+    width:50%;
+    margin-bottom: 100px;
+}
+
+.landing h1{
+    color:$primary-font;
+    font-size: 2.8rem;
+    line-height: 3.1rem;
+    padding:64px;
+    width:50%;
+}
+
+
+#dv {
+    background-image:
+        linear-gradient(
+        to right,
+        #000 40%,
+        transparent 58%
+        ),
+        url(https://m.media-amazon.com/images/G/31/AmazonVideo/2019/MLP.jpg);
+    background-position: right top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height:560px;
+
+}
+
+
+@media all and (max-width: 1300px) {
+#dv {
+    background-size: cover;
+}
+}
+
+@media all and (max-width: 1300px) and (orientation: portrait) {
+#dv {
+    background-color: #000;
+    background-image: none;
+}
+.landing p,.landing h1{
+    width: 100%;
+}
+.disabled {
+    display: block;
+    width: 100%;
+    margin:0px;
+    padding:0px;
+    
+    img {
+
+        height:80%px;
+        width:100%;
+    }
+}
+}
+
+@media all and (max-height: 580px) and (orientation: landscape) {
+#dv {
+    background-size: 80%;
+}
+}
