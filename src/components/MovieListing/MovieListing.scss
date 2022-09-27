@@ -1,10 +1,17 @@
 @import "../../common/colors.scss";
 
+
+.movie-wrapper .loading{
+    display: flex;
+    color: $primary-font;
+    justify-content: center;
+}
 .movie-list,h2 {
     margin: 20px 0px;
     color: $secondary-font;
     margin-bottom: 10px;
     font-weight: 400;
+    
     
 }
 

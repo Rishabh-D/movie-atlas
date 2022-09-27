@@ -3,10 +3,14 @@
 .landing{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: safe;
     align-items: flex-start;
     flex-wrap: nowrap;
     
+    // width: 100%;
+    margin:0px;
+    padding:0px;
+   
     
 }
 
@@ -37,7 +41,7 @@
         #000 40%,
         transparent 58%
         ),
-        url(https://m.media-amazon.com/images/G/31/AmazonVideo/2019/MLP.jpg);
+        url("../../images/landingPagesmall.jpg");
     background-position: right top;
     background-size: cover;
     background-repeat: no-repeat;

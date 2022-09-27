@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import movieApi from "../../common/apis/movieApi"
 import { APIKey } from "../../common/apis/MovieApiKey"
-
+import { useDispatch } from 'react-redux';
 
 // create the thunk after importing createAsyncThunk 
 // and call it inside dispatch in `Home`
@@ -17,6 +17,11 @@ export const fetchAsyncMovies = createAsyncThunk(
         console.log("tag is",tag)
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=movie`)
         const { data } = await response;
+        if (data.Response === 'False'){
+            
+            return []
+        }
+        
         return data.Search // data.Search contains the array of movie data
 
     }
@@ -32,6 +37,11 @@ export const fetchAsyncSeries = createAsyncThunk(
         }
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
         const { data } = await response;
+        if (data.Response === 'False'){
+            
+            return []
+        }
+        
         return data.Search // data.Search contains the array of movie data
     }
 )
@@ -48,11 +58,15 @@ export const fetchAsyncMovieOrSeriesDetails = createAsyncThunk(
 )
 
 
+
+
 const initialState = {
     movies : [],
     series: [],
     selectedMovieOrSeriesDetails: {},
-    searchText: ""
+    searchText: "",
+    movieFetchError : false,
+    seriesFetchError : false
 }
 
 // handle the actions in reducers (extraReducers)
@@ -66,6 +80,13 @@ const movieSlice = createSlice({
         },
         setSearchText: (state, {payload}) => {
             state.searchText = payload
+        },
+        setMovieFetchError: (state, {payload} ) => {
+            console.log(payload,"payload")
+            state.movieFetchError = payload;
+        },
+        setSeriesFetchError: (state, {payload}) => {
+            state.seriesFetchError = payload;
         }
     },
     //extra reducers for thunk
@@ -93,13 +114,15 @@ const movieSlice = createSlice({
 })
 
 // .actions will be used inside dispatch (provoded by useDispatch())
-export const {removeMovieOrSeriesDetail, setSearchText} = movieSlice.actions;
+export const {removeMovieOrSeriesDetail, setSearchText,setMovieFetchError, setSeriesFetchError} = movieSlice.actions;
 
 // below function are used by useSelector to collect the data
 export const getAllMovies = (state) => state.movies.movies;
 export const getAllSeries = (state) => state.movies.series;
 export const getSelectedMovieOrSeriesDetail = (state) => state.movies.selectedMovieOrSeriesDetails
 export const getSearchText = (state) => state.movies.searchText;
+export const getmovieFetchError = (state) => state.movies.movieFetchError
+export const getseriesFetchError = (state) => state.movies.seriesFetchError
 //used by store inside configure store function , reducer : {}
 export default movieSlice.reducer;
 
