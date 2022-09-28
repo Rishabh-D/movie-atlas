@@ -28,7 +28,7 @@ const MovieDetail = () => {
     return (
         <div className="movie-section">
       {Object.keys(data).length === 0 ? (
-        <div><i class="fas fa-spinner"></i></div>
+        <div><i className="fas fa-spinner"></i></div>
       ) : (
         <>
           <div className="section-left">

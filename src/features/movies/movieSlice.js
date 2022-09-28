@@ -8,9 +8,10 @@ import { useDispatch } from 'react-redux';
 
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',
-    async (tag) => {
+    async (tag,{rejectWithValue}) => {
         // write the async fetch function here
         // return the data as Promise
+        console.log("checkin the tag coming from header",tag)
         if (tag==undefined || tag == null || tag==""){
             tag="harry"
         }
@@ -19,7 +20,7 @@ export const fetchAsyncMovies = createAsyncThunk(
         const { data } = await response;
         if (data.Response === 'False'){
             
-            return []
+            return  rejectWithValue([{"error":"error"}])
         }
         
         return data.Search // data.Search contains the array of movie data
@@ -31,15 +32,16 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncSeries = createAsyncThunk(
     'movies/fetchAsyncSeries',
-    async (tag) => {
-        if (tag==undefined || tag == null || tag==""){
+    async (tag,{rejectWithValue}) => {
+        console.log("checkin the tag coming from header",tag)
+        if (tag==undefined || tag == null || tag.trim()==""){
             tag="harry"
         }
         const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
         const { data } = await response;
         if (data.Response === 'False'){
             
-            return []
+            return  rejectWithValue([{"error":"error"}])
         }
         
         return data.Search // data.Search contains the array of movie data
@@ -65,8 +67,8 @@ const initialState = {
     series: [],
     selectedMovieOrSeriesDetails: {},
     searchText: "",
-    movieFetchError : false,
-    seriesFetchError : false
+    // movieFetchError : false,
+    // seriesFetchError : false
 }
 
 // handle the actions in reducers (extraReducers)
@@ -80,31 +82,35 @@ const movieSlice = createSlice({
         },
         setSearchText: (state, {payload}) => {
             state.searchText = payload
-        },
-        setMovieFetchError: (state, {payload} ) => {
-            console.log(payload,"payload")
-            state.movieFetchError = payload;
-        },
-        setSeriesFetchError: (state, {payload}) => {
-            state.seriesFetchError = payload;
         }
     },
     //extra reducers for thunk
     extraReducers:  {
-        [fetchAsyncMovies.pending]: () => {
-            console.log("pending")
+        [fetchAsyncMovies.pending]: (state, {payload}) => {
+            console.log("movie request pending")
+            return {...state, movies:[]}
         },
         [fetchAsyncMovies.fulfilled]: (state, {payload}) => {
             console.log("successfully fetched movies")
             return {...state, movies: payload}
         },
-        [fetchAsyncMovies.rejected]: () => {
-            console.log("rejected")
+        [fetchAsyncMovies.rejected]: (state, {payload}) => {
+            console.log("rejected movies", payload)
+            return {...state, movies:payload}
+        },
+        [fetchAsyncSeries.pending]: (state, {payload}) => {
+            console.log("series request pending")
+            return {...state, series:[]}
         },
         [fetchAsyncSeries.fulfilled]: (state, {payload}) => {
             console.log("successfully fetched series")
             return {...state, series:payload}
         },
+        [fetchAsyncSeries.rejected]: (state, {payload}) => {
+            console.log("rejected series", payload)
+            return {...state, series:payload}
+        },
+
         [fetchAsyncMovieOrSeriesDetails.fulfilled]: (state, {payload}) => {
             console.log("successfully fetched details")
             return {...state, selectedMovieOrSeriesDetails:payload}
@@ -121,8 +127,6 @@ export const getAllMovies = (state) => state.movies.movies;
 export const getAllSeries = (state) => state.movies.series;
 export const getSelectedMovieOrSeriesDetail = (state) => state.movies.selectedMovieOrSeriesDetails
 export const getSearchText = (state) => state.movies.searchText;
-export const getmovieFetchError = (state) => state.movies.movieFetchError
-export const getseriesFetchError = (state) => state.movies.seriesFetchError
 //used by store inside configure store function , reducer : {}
 export default movieSlice.reducer;
 

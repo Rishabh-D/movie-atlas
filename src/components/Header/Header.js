@@ -10,17 +10,39 @@ import toast, {Toaster} from 'react-hot-toast';
 const Header = () => {
     const [term, setTerm] = useState("")
     const dispatch = useDispatch()
-    let history = useHistory();
+    const history = useHistory();
     const submitHandler=(e)=>{
         e.preventDefault();
-        console.log("search")
-        dispatch(fetchAsyncMovies(term))
-        dispatch(fetchAsyncSeries(term))
-        dispatch(setSearchText(term))
-        history.push("/home")
+        console.log(e.target.name)
+        if (e.target.name!=="anchor"){
+            console.log("search")
+            dispatch(fetchAsyncMovies(term.trim()))
+            dispatch(fetchAsyncSeries(term.trim()))
+            dispatch(setSearchText(term.trim()))
+            history.push("/home")
+        }
+    }
 
+    const displayToast = (e) => {
+        console.log(e.target)
+        e.preventDefault();
+        if (e.target.name === "anchor"){
+            toast('Connect with me',
+                    {
+                        icon: '😄',
+                        position: "top-right",
+                        duration:2000,
+                        style: {
+                        borderRadius: '10px',
+                        background: '#0f171e',
+                        color: '#fff',
+                        },
+                    }
+                );
+        }
 
     }
+
     return (
         <div className="header">
             <Link to="/"><div className='logo'>Movie App</div></Link>
@@ -33,7 +55,7 @@ const Header = () => {
                             onChange={(e)=>setTerm(e.target.value)}
                     />
                     
-                        <button type="submit">
+                        <button type="submit" name="input">
                         <i className='fa fa-search'></i>
                         </button>
                     
@@ -49,20 +71,12 @@ const Header = () => {
                         right: 20,
                       }}
                 />
-                <a href="https://www.linkedin.com/in/rishabh-dubey-bb6624140/" target="_blank">
+                <a 
+                    name="anchor"
+                    onMouseEnter = {(e) => displayToast(e)} 
+                    href="https://www.linkedin.com/in/rishabh-dubey-bb6624140/" target="_blank"
+                >
                 <img 
-                    onMouseOver = {
-                        () => (
-                            toast('Click to connect with me.', 
-                                {
-                                    position: "top-right",
-                                    icon:"😄",
-                                    duration:2000
-                                
-                                }
-                                )
-                            )
-                        } 
                     src={userImg} 
                     className="user-image"
                     alt="user-img" 
