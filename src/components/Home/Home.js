@@ -7,9 +7,11 @@ import { fetchAsyncMovies, fetchAsyncSeries } from '../../features/movies/movieS
 import { getSearchText } from '../../features/movies/movieSlice';
 import { type } from '@testing-library/user-event/dist/type';
 import toast, { Toaster } from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 const Home = () => {
 
     // const dispatch = useDispatch();
+    const history = useHistory()
     const searchText = useSelector(getSearchText)
 
     console.log("featching searchtext", searchText, typeof(searchText))
@@ -25,7 +27,9 @@ const Home = () => {
             { searchText==="" ? 
                 (
 
-                    <h2>Search space empty</h2>
+                    // <h2>Search space empty</h2>
+                    history.replace("/")
+                    
                 )
             
                 :

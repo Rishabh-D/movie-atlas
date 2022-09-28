@@ -27,7 +27,7 @@ const Header = () => {
         console.log(e.target)
         e.preventDefault();
         if (e.target.name === "anchor"){
-            toast('Connect with me',
+            toast(`Let's Connect on Linkedin`,
                     {
                         icon: '😄',
                         position: "top-right",

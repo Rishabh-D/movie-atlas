@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 
 import "./MovieCard.scss"
 
+
 const MovieCard = ({ data }) => {
     const {Title, Year, imdbID, Type, Poster} = data
+    console.log("card is printed",data)
     return (
         <div className='card-item'>
             <Link to={`/movie/${imdbID}`}>
