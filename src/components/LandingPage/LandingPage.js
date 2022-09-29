@@ -8,7 +8,7 @@ const LandingPage = () => {
                 <img src={LandingPagedefault}/>
             </div>
             <h1>Welcome to Movie App</h1>    
-            <p>Search latest movies, TV shows only on Movie App</p>
+            <p>Search info about latest movies, TV shows only on Movie App</p>
         </div>
     );
 };

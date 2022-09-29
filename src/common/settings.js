@@ -1,39 +1,45 @@
 export const Settings = {
+    centerMode: true, // - (Gilad, 20.2.17) - we wanted it but it doesn't work for some reason...
+    draggable: true,
+    centerPadding: 0,
+    swipeToSlide: true,
+    infinite: true,
     dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 6,
+    speed: 1000,
+    slidesToShow: 7,
     slidesToScroll: 1,
+    autoplay:true,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1500,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 4,
-          dots: true,
+          slidesToScroll: 1,
+          
         },
       },
       {
         breakpoint: 1300,
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 3,
-          dots: true,
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          dots: true,
+          slidesToScroll: 1,
+          
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
 
         },
       },

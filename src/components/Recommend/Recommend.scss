@@ -1,0 +1,21 @@
+
+@import "../../common/colors.scss";
+
+.slick-slide.slick-center .card-item {
+    transform: scale(1.1);
+    
+    border-radius: 5%;
+    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+    // margin-left: 10px;
+    // margin-right: 10px; 
+    p {
+        color:$secondary-color;
+        font-weight: 600;
+    }
+}
+
+.slick-slide.slick-center .card-bottom {
+    background-color: whitesmoke ;
+}
+
+

@@ -5,6 +5,7 @@ import MovieCard from "../MovieCard/MovieCard"
 import Slider from "react-slick";
 import {Settings} from "../../common/settings.js"
 import "./MovieListing.scss"
+import Recommend from '../Recommend/Recommend';
 
 const MovieListing = ({searchText}) => {
     const movies = useSelector(getAllMovies) 
@@ -32,8 +33,9 @@ const MovieListing = ({searchText}) => {
                     <>
                         {movies[0]["error"] === "error" && series[0]["error"] === "error" ?
                             <>
-                                <h2>We didn't find any matches for {searchText}</h2>
-                                <h2>render Recommendation component here</h2>
+                                <h2>We didn't find any matches for '{searchText}'</h2>
+                                <hr></hr>
+                                <Recommend></Recommend>
                             </>
                             :
                             <>

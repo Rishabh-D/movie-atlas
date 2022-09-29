@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import movieApi from "../../common/apis/movieApi"
 import { APIKey } from "../../common/apis/MovieApiKey"
-import { useDispatch } from 'react-redux';
 
 // create the thunk after importing createAsyncThunk 
 // and call it inside dispatch in `Home`
@@ -67,8 +66,7 @@ const initialState = {
     series: [],
     selectedMovieOrSeriesDetails: {},
     searchText: "",
-    // movieFetchError : false,
-    // seriesFetchError : false
+    recommededShows : []
 }
 
 // handle the actions in reducers (extraReducers)

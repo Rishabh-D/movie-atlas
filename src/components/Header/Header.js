@@ -25,9 +25,11 @@ const Header = () => {
 
     const displayToast = (e) => {
         console.log(e.target)
-        e.preventDefault();
-        if (e.target.name === "anchor"){
-            toast(`Let's Connect on Linkedin`,
+        // e.preventDefault();
+        
+        const message = "Let's Connect on Linkedin" 
+        if (e.target.name === "linkedin"){
+            toast(message,
                     {
                         icon: '😄',
                         position: "top-right",
@@ -61,9 +63,7 @@ const Header = () => {
                     
                 </form>
             </div>
-
-            <div>
-                <Toaster
+            <Toaster
                     containerStyle={{
                         top: 72,
                         left: 20,
@@ -71,17 +71,22 @@ const Header = () => {
                         right: 20,
                       }}
                 />
+            <div>
+                
                 <a 
-                    name="anchor"
-                    onMouseEnter = {(e) => displayToast(e)} 
+                    name="linkedin"
                     href="https://www.linkedin.com/in/rishabh-dubey-bb6624140/" target="_blank"
+                    style={{width:"100%", display: "inline"}}
+                    onMouseEnter = {(e) => displayToast(e)} 
                 >
-                <img 
-                    src={userImg} 
-                    className="user-image"
-                    alt="user-img" 
-                    style={{backgroundColor:"#1a242f"}}></img>   
+                    <img 
+                        src={userImg} 
+                        className="user-image"
+                        alt="user-img" 
+                        style={{backgroundColor:"#1a242f"}}>
+                    </img>   
                 </a>
+
             </div>
         </div>
     );

@@ -10,3 +10,12 @@
     color:$primary-font;
     margin-top:30px;
 }
+
+.footer .title {
+    display: flex;
+    min-width: 100px;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+
+}
