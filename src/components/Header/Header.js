@@ -13,9 +13,9 @@ const Header = () => {
     const history = useHistory();
     const submitHandler=(e)=>{
         e.preventDefault();
-        console.log(e.target.name)
+        // console.log(e.target.name)
         if (e.target.name!=="anchor"){
-            console.log("search")
+            // console.log("search")
             dispatch(fetchAsyncMovies(term.trim()))
             dispatch(fetchAsyncSeries(term.trim()))
             dispatch(setSearchText(term.trim()))
@@ -24,7 +24,7 @@ const Header = () => {
     }
 
     const displayToast = (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         // e.preventDefault();
         
         const message = "Let's Connect on Linkedin" 

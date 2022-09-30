@@ -10,6 +10,8 @@ import Recommend from '../Recommend/Recommend';
 const MovieListing = ({searchText}) => {
     const movies = useSelector(getAllMovies) 
     const series = useSelector(getAllSeries)
+    const movieSliderRef = useRef()
+    const seriesSliderRef = useRef()
    
     const moviesCards = movies.map(movie => {
         if (movie["error"])
@@ -22,6 +24,19 @@ const MovieListing = ({searchText}) => {
             return
         return <MovieCard id = {series.imdbID} key = {series.imdbID} data={series}></MovieCard>
     })
+
+    const onWheelSlider = (e, name) => {
+        // console.log("inside loadad", e.deltaX)
+        const slid = name === "movies" ? movieSliderRef : seriesSliderRef
+        // console.log(name)
+        if (!slid.current) return;
+
+        if (e.deltaX > 0) {
+            slid.current.slickNext();
+        } else if (e.deltaX < 0) {
+            slid.current.slickPrev();
+        }
+    };
     
     // console.log("upper",series, movies)
     return (
@@ -43,11 +58,11 @@ const MovieListing = ({searchText}) => {
                                 
                                 {!movies[0]["error"]? 
                                     <>
-                                        {console.log(moviesCards)}
+                                        {/* {console.log(moviesCards)} */}
                                        <div className='movie-list'>
                                             <h2>Movies</h2>
-                                            <div className='movie-container'>
-                                                <Slider {...Settings}>{moviesCards}</Slider>
+                                            <div onWheel={e => onWheelSlider(e,"movies")} className='movie-container'>
+                                                <Slider ref={movieSliderRef} {...Settings}>{moviesCards}</Slider>
                                                 {/* {moviesCards} */}
                                             </div>
                                         </div> 
@@ -59,8 +74,8 @@ const MovieListing = ({searchText}) => {
                                     <>
                                        <div className='movie-list'>
                                             <h2>Series</h2>
-                                            <div className='movie-container'>
-                                                <Slider {...Settings}>{seriesCards}</Slider>
+                                            <div onWheel={e => onWheelSlider(e, "series")} className='movie-container'>
+                                                <Slider ref={seriesSliderRef} {...Settings}>{seriesCards}</Slider>
                                             </div>
                                         </div>
                                     </>

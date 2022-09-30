@@ -9,7 +9,7 @@ import PageNotFound from "./components/PageNotFound/PageNotFound"
 import './App.scss';
 
 function App() {
-  console.log("app")
+  // console.log("app")
   return (
     <div className='app'>
       <Router>

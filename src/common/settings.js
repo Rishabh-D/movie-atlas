@@ -1,5 +1,5 @@
 export const Settings = {
-    centerMode: true, // - (Gilad, 20.2.17) - we wanted it but it doesn't work for some reason...
+    centerMode: true, 
     draggable: true,
     centerPadding: 0,
     swipeToSlide: true,
@@ -8,8 +8,9 @@ export const Settings = {
     speed: 1000,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay:true,
-    autoplaySpeed: 3000,
+    // disabled autoplay feature as it affected UX 
+    // autoplay:true,
+    // autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1500,

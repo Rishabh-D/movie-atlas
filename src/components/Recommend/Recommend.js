@@ -11,7 +11,7 @@ const Recommend = () => {
         return <MovieCard key={show.id} data={show}></MovieCard>
     })
     const onWheelSlider = (e) => {
-        console.log("inside loadad",e.deltaX)
+        // console.log("inside loadad",e.deltaX)
         if (!sliderRef.current) return;
 
         if (e.deltaX > 0) {
@@ -24,9 +24,6 @@ const Recommend = () => {
     return (
         <div onWheel={(e) => onWheelSlider(e)}>
             <Slider ref = {sliderRef} {...Settings}>{shows}</Slider>
-
-            
-            {/* <img src={`images/slide1.jpg`} /> */}
         </div>
     );
 };

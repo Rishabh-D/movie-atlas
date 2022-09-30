@@ -14,38 +14,24 @@ const Home = () => {
     const history = useHistory()
     const searchText = useSelector(getSearchText)
 
-    console.log("featching searchtext", searchText, typeof(searchText))
-    // useEffect(() => { 
-    //     dispatch(fetchAsyncMovies(searchText))
-    //     dispatch(fetchAsyncSeries(searchText))
-    // },[dispatch])
-
-    console.log("runs home","searchText",searchText)
+    // console.log("featching searchtext", searchText, typeof(searchText))
+    
+    // console.log("runs home","searchText",searchText)
     return (
         <>
-            
             { searchText==="" ? 
                 (
-
-                    // <h2>Search space empty</h2>
-                    history.replace("/")
-                    
+                    history.replace("/")   
                 )
             
                 :
                 (
-                    
                     <div className='banner-img'>
                         <MovieListing searchText={searchText}></MovieListing>
                     </div>
                 )
             } 
-            
-
-        </>
-
-        
-       
+        </>   
     );
 };
 
