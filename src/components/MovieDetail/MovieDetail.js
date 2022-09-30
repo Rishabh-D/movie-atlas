@@ -23,15 +23,18 @@ const MovieDetail = () => {
             // for few second before new data is fetched... we dont wont user to have this bad bad experince
             dispatch(removeMovieOrSeriesDetail())
         }
-    }, [dispatch])
+    }, [dispatch, imdbID])
 
     return (
-        <div className="movie-section">
+      <div id = "detailsPage" className="movie-section" style={{ backgroundImage: `url(${data.Poster})` }}>
       {Object.keys(data).length === 0 ? (
         <div><i className="fas fa-spinner"></i></div>
       ) : (
         <>
           <div className="section-left">
+                <div className="section-right disabled">
+                  <img src={data.Poster} alt={data.Title} />
+                </div>
             <div className="movie-title">{data.Title}</div>
             <div className="movie-rating">
               <span>
@@ -72,9 +75,7 @@ const MovieDetail = () => {
               </div>
             </div>
           </div>
-          <div className="section-right">
-            <img src={data.Poster} alt={data.Title} />
-          </div>
+          
         </>
       )}
     </div>

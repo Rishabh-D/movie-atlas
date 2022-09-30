@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    // border: solid green
 }
 
 .logo {
@@ -62,3 +63,19 @@
     }
 
   }
+
+@media all and (max-width:560px){
+.header {
+    // border: solid red;
+    // display: none;
+    justify-content: flex-start;
+    .logo{
+      display: none;
+    }
+    .search-bar,.user-image{
+      width: 100%;
+      padding:0px
+    }
+
+  }
+}

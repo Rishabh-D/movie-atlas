@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { useSelector } from 'react-redux';
 import { getAllMovies, getAllSeries } from '../../features/movies/movieSlice';
 import MovieCard from "../MovieCard/MovieCard"
@@ -10,6 +10,7 @@ import Recommend from '../Recommend/Recommend';
 const MovieListing = ({searchText}) => {
     const movies = useSelector(getAllMovies) 
     const series = useSelector(getAllSeries)
+   
     const moviesCards = movies.map(movie => {
         if (movie["error"])
             return

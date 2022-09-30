@@ -6,15 +6,15 @@ export const Settings = {
     infinite: true,
     dots: false,
     speed: 1000,
-    slidesToShow: 7,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay:true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 4,
           slidesToScroll: 1,
           
         },
@@ -22,7 +22,7 @@ export const Settings = {
       {
         breakpoint: 1300,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           slidesToScroll: 1,
           
         },
@@ -38,7 +38,7 @@ export const Settings = {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
 
         },
