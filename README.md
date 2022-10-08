@@ -16,7 +16,7 @@ Insert gif or link to demo
 Clone the project
 
 ```bash
-  git clone https://github.com/Rishabh-D/movie atlas
+  git clone https://github.com/Rishabh-D/movie-atlas.git
 ```
 
 Go to the project directory
