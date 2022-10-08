@@ -1,22 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import movieApi from "../../common/apis/movieApi"
-import { APIKey } from "../../common/apis/MovieApiKey"
-
-
 // create the thunk after importing createAsyncThunk 
 // and call it inside dispatch in `Home`
 
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',
-    async (tag) => {
+    async (tag,{rejectWithValue}) => {
         // write the async fetch function here
         // return the data as Promise
+        // console.log("checkin the tag coming from header",tag)
         if (tag==undefined || tag == null || tag==""){
             tag="harry"
         }
-        console.log("tag is",tag)
-        const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=movie`)
+        // console.log("tag is",tag)
+        const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=movie`)
         const { data } = await response;
+        if (data.Response === 'False'){
+            
+            return  rejectWithValue([{"error":"error"}])
+        }
+        
         return data.Search // data.Search contains the array of movie data
 
     }
@@ -26,12 +29,18 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncSeries = createAsyncThunk(
     'movies/fetchAsyncSeries',
-    async (tag) => {
-        if (tag==undefined || tag == null || tag==""){
+    async (tag,{rejectWithValue}) => {
+        // console.log("checkin the tag coming from header",tag)
+        if (tag==undefined || tag == null || tag.trim()==""){
             tag="harry"
         }
-        const response = await movieApi.get(`?apiKey=${APIKey}&s=${tag}&type=series`)
+        const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=series`)
         const { data } = await response;
+        if (data.Response === 'False'){
+            
+            return  rejectWithValue([{"error":"error"}])
+        }
+        
         return data.Search // data.Search contains the array of movie data
     }
 )
@@ -41,18 +50,21 @@ export const fetchAsyncSeries = createAsyncThunk(
 export const fetchAsyncMovieOrSeriesDetails = createAsyncThunk(
     'movies/fetchAsyncMovieOrSeriesDetails',
     async (id) => {
-        const response = await movieApi.get(`?apiKey=${APIKey}&i=${id}&Plot=full`)
+        const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&i=${id}&Plot=full`)
         const { data } = await response;
         return data
     }
 )
 
 
+
+
 const initialState = {
     movies : [],
     series: [],
     selectedMovieOrSeriesDetails: {},
-    searchText: ""
+    searchText: "",
+    recommededShows : []
 }
 
 // handle the actions in reducers (extraReducers)
@@ -70,22 +82,33 @@ const movieSlice = createSlice({
     },
     //extra reducers for thunk
     extraReducers:  {
-        [fetchAsyncMovies.pending]: () => {
-            console.log("pending")
+        [fetchAsyncMovies.pending]: (state, {payload}) => {
+            // console.log("movie request pending")
+            return {...state, movies:[]}
         },
         [fetchAsyncMovies.fulfilled]: (state, {payload}) => {
-            console.log("successfully fetched movies")
+            // console.log("successfully fetched movies")
             return {...state, movies: payload}
         },
-        [fetchAsyncMovies.rejected]: () => {
-            console.log("rejected")
+        [fetchAsyncMovies.rejected]: (state, {payload}) => {
+            // console.log("rejected movies", payload)
+            return {...state, movies:payload}
+        },
+        [fetchAsyncSeries.pending]: (state, {payload}) => {
+            // console.log("series request pending")
+            return {...state, series:[]}
         },
         [fetchAsyncSeries.fulfilled]: (state, {payload}) => {
-            console.log("successfully fetched series")
+            // console.log("successfully fetched series")
             return {...state, series:payload}
         },
+        [fetchAsyncSeries.rejected]: (state, {payload}) => {
+            // console.log("rejected series", payload)
+            return {...state, series:payload}
+        },
+
         [fetchAsyncMovieOrSeriesDetails.fulfilled]: (state, {payload}) => {
-            console.log("successfully fetched details")
+            // console.log("successfully fetched details")
             return {...state, selectedMovieOrSeriesDetails:payload}
         }
 
@@ -93,7 +116,7 @@ const movieSlice = createSlice({
 })
 
 // .actions will be used inside dispatch (provoded by useDispatch())
-export const {removeMovieOrSeriesDetail, setSearchText} = movieSlice.actions;
+export const {removeMovieOrSeriesDetail, setSearchText,setMovieFetchError, setSeriesFetchError} = movieSlice.actions;
 
 // below function are used by useSelector to collect the data
 export const getAllMovies = (state) => state.movies.movies;

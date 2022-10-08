@@ -3,11 +3,10 @@
 .landing{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
     flex-wrap: nowrap;
-    
-    
+    margin:0px;
+    padding:0px;
 }
 
 .disabled {
@@ -37,9 +36,9 @@
         #000 40%,
         transparent 58%
         ),
-        url(https://m.media-amazon.com/images/G/31/AmazonVideo/2019/MLP.jpg);
+        url("../../images/landingPagesmall.jpg");
     background-position: right top;
-    background-size: cover;
+    // background-size: cover;
     background-repeat: no-repeat;
     background-color: #000;
     min-height:560px;
@@ -69,7 +68,7 @@
     
     img {
 
-        height:80%px;
+        height:80%;
         width:100%;
     }
 }

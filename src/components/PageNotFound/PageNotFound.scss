@@ -1,0 +1,12 @@
+@import "../../common/colors.scss";
+
+.pageNotFound {
+    
+    background-image:url('../../../public/images/404.PNG');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-color: primary-color;
+    background-size:contain;
+    min-height: 80vh;
+    background-size: 100%;
+   }

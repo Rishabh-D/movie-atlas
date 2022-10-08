@@ -5,21 +5,33 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchAsyncMovies, fetchAsyncSeries } from '../../features/movies/movieSlice';
 import { getSearchText } from '../../features/movies/movieSlice';
+import { type } from '@testing-library/user-event/dist/type';
+import toast, { Toaster } from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 const Home = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    const history = useHistory()
     const searchText = useSelector(getSearchText)
-    console.log("featching searchtext", searchText)
-    useEffect(() => { 
-        dispatch(fetchAsyncMovies(searchText))
-        dispatch(fetchAsyncSeries(searchText))
-    },[dispatch])
 
-    console.log("runs home")
+    // console.log("featching searchtext", searchText, typeof(searchText))
+    
+    // console.log("runs home","searchText",searchText)
     return (
-        <div className='banner-img'>
-            <MovieListing></MovieListing>
-        </div>
+        <>
+            { searchText==="" ? 
+                (
+                    history.replace("/")   
+                )
+            
+                :
+                (
+                    <div className='banner-img'>
+                        <MovieListing searchText={searchText}></MovieListing>
+                    </div>
+                )
+            } 
+        </>   
     );
 };
 

@@ -1,22 +1,35 @@
 @import "../../common/colors.scss";
 
+.movie-wrapper{
+    padding: 0px 40px;
+}
+
+.movie-wrapper .loading{
+    display: flex;
+    color: $primary-font;
+    justify-content: center;
+    
+}
 .movie-list,h2 {
     margin: 20px 0px;
     color: $secondary-font;
     margin-bottom: 10px;
     font-weight: 400;
     
+    
 }
 
 .slick-dots  button:before {
     color:White !important;
 }
-// .movie-container {
-//     // grid-template-columns: repeat(6, minmax(220px, 1fr));
-//     display: grid;
-//     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-//     gap: 30px 30px;
-// }
+
+.slider-arrow {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+  }
+
 
 
 
