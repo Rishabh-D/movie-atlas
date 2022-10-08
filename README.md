@@ -8,14 +8,15 @@ Insert gif or link to demo
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+<img src= "demo/Landing_Page.PNG" width=800>
+<img src= "demo/Home%20_page.PNG" width=800>
+<img src= "demo/Details_page.PNG" width=800>
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/Rishabh-D/movie-app
+  git clone https://github.com/Rishabh-D/movie atlas
 ```
 
 Go to the project directory
