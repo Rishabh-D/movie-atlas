@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-// import movieApi from '../../common/apis/movieApi'
+// import axios from 'axios'
+import movieApi from '../../common/apis/movieApi'
 // create the thunk after importing createAsyncThunk
 // and call it inside dispatch in `Home`
 
@@ -15,7 +15,7 @@ export const fetchAsyncMovies = createAsyncThunk(
       tag = 'harry'
     }
     // console.log("tag is",tag)
-    const response = await axios.get(`https:www.omdbapi.com?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=movie`)
+    const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=movie`)
     const { data } = await response
     if (data.Response === 'False') {
       return rejectWithValue([{ error: 'error' }])
@@ -34,7 +34,7 @@ export const fetchAsyncSeries = createAsyncThunk(
     if (tag === undefined || tag === null || tag.trim() === '') {
       tag = 'harry'
     }
-    const response = await axios.get(`https:www.omdbapi.com?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=series`)
+    const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&s=${tag}&type=series`)
     const { data } = await response
     if (data.Response === 'False') {
       return rejectWithValue([{ error: 'error' }])
@@ -49,7 +49,7 @@ export const fetchAsyncSeries = createAsyncThunk(
 export const fetchAsyncMovieOrSeriesDetails = createAsyncThunk(
   'movies/fetchAsyncMovieOrSeriesDetails',
   async (id) => {
-    const response = await axios.get(`https:www.omdbapi.com?apiKey=${process.env.REACT_APP_API_KEY}&i=${id}&Plot=full`)
+    const response = await movieApi.get(`?apiKey=${process.env.REACT_APP_API_KEY}&i=${id}&Plot=full`)
     const { data } = await response
     return data
   }
