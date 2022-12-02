@@ -46,7 +46,7 @@ const Header = () => {
 
   return (
         <div className="header">
-            <Link to="/"><div className='logo'>Movie App</div></Link>
+            <Link to="/"><div className='logo'>Movie Atlas</div></Link>
 
             <div className="search-bar">
                 <form disabled onSubmit={submitHandler}>
