@@ -7,7 +7,7 @@ const LandingPage = () => {
             <div className="disabled" >
                 <img src={LandingPagedefault}/>
             </div>
-            <h1>Welcome to Movie App</h1>
+            <h1>Welcome to Movie Atlas</h1>
             <p>Search info about latest movies, TV shows only on Movie App</p>
         </div>
   )
