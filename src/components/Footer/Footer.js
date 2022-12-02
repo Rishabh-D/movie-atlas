@@ -32,11 +32,11 @@ const Footer = () => {
                     }}
                 />
             <div className="title">
-                <div>Movie App</div>
+                <div>Movie Atlas</div>
 
                 <a
                     name="git"
-                    href="https://github.com/Rishabh-D/movie-app"
+                    href="https://github.com/Rishabh-D/movie-atlas"
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter = {(e) => displayToast(e)}
